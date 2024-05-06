@@ -6,7 +6,7 @@ int	get_prompt(void)
 	char	*prompt;
 
 	prompt = "$ ";
-	input = readline(prompt);
+	input = readline(prompt); // input needs to be freed
 	if (!input)
 		return (1);
 	if (input[0] == '\0')
@@ -14,7 +14,7 @@ int	get_prompt(void)
 		free(input);
 		return (0);
 	}
-	printf("You entered: %s\n", input);
+	printf("\033[0;37mYou entered: \033[1;37m%s\033[0m\n", input);
 	add_history(input);
 	free(input);
 	return (0);

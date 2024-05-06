@@ -7,7 +7,8 @@ LIBFT	:=	libft
 LDFLAGS	:=	-lreadline
 
 VPATH = \
-	src
+	src \
+	src/token
 
 # Sources
 SRC = \

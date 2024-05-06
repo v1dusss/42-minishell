@@ -1,0 +1,7 @@
+minishell
+obj/
+*.o
+*.a
+*.out
+.DS_Store
+.vscode/

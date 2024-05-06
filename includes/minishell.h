@@ -20,4 +20,22 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 
+typedef enum e_token_type
+{
+	TOKEN_WORD,
+	TOKEN_SPACE,
+	TOKEN_PIPE,
+}					t_token_type;
+
+typedef struct s_token
+{
+	char			*content;
+	t_token_type	type;
+	int				index;
+	struct s_token	*next;
+	struct s_token	*prev;
+}					t_token;
+
+void				tokenize(char *input);
+
 #endif
