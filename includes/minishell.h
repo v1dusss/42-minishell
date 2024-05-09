@@ -44,5 +44,8 @@ typedef struct s_token
 }					t_token;
 
 void				tokenize(char *input);
+t_token				*tokenfirst(t_token **token);
+t_token				*tokenlast(t_token **token);
+void				token_new(t_token **token);
 
 #endif
