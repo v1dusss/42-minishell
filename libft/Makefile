@@ -6,7 +6,7 @@
 #    By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 20:24:52 by vsivanat          #+#    #+#              #
-#    Updated: 2024/05/05 16:11:21 by vsivanat         ###   ########.fr        #
+#    Updated: 2024/05/09 15:21:11 by vsivanat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC :=		ft_atof.c \
 			ft_putnbr_fd.c \
 			ft_putstr_fd.c \
 			ft_split.c \
+			ft_strchr_i.c \
 			ft_strchr.c \
 			ft_strcmp.c \
 			ft_strdup.c \

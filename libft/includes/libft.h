@@ -6,7 +6,7 @@
 /*   By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:55:51 by vsivanat          #+#    #+#             */
-/*   Updated: 2024/05/04 18:40:31 by vsivanat         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:44:28 by vsivanat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void				ft_putnbr_fd(int n, int fd);
 //--------------------------------- String -------------------------------------
 //==============================================================================
 char				**ft_split(char const *s, char c);
+int					ft_strchr_i(char const *str, int c);
 char				*ft_strchr(const char *str, int n);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strdup(const char *s1);
