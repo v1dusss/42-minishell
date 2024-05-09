@@ -16,6 +16,7 @@ int	get_prompt(void)
 	}
 	printf("\033[0;37mYou entered: \033[1;37m%s\033[0m\n", input);
 	add_history(input);
+	tokenize(input);
 	free(input);
 	return (0);
 }

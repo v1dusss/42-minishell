@@ -12,7 +12,8 @@ VPATH = \
 
 # Sources
 SRC = \
-	main.c 
+	main.c \
+	tokenizer.c
 
 # Objects
 OBJ_DIR := obj
