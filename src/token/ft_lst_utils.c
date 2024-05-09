@@ -30,10 +30,10 @@ t_token	*tokenlast(t_token **token)
 
 void	token_new(t_token **token)
 {
-	t_token		*new;
-	t_token		*temp;
-	static int	index;
+	t_token	*new;
+	t_token	*temp;
 
+	temp = NULL;
 	new = malloc(sizeof(t_token));
 	if (!new)
 	{
@@ -41,18 +41,16 @@ void	token_new(t_token **token)
 		exit(1);
 	}
 	new->next = NULL;
-	if (index == 0)
+	if (!*token)
 	{
-		new->index = index++;
 		*token = new;
 		new->prev = NULL;
 	}
 	else
 	{
-		new->index = index++;
 		temp = tokenlast(token);
 		temp->next = new;
-		new->prev = *token;
-		*token = new;
+		new->prev = temp;
+		temp = new;
 	}
 }

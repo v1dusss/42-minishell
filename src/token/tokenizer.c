@@ -48,11 +48,15 @@ void	tokenize(char *input)
 {
 	t_token	*token;
 	t_token	*temp;
+	int		index;
 	int		i;
 	int		x;
 
+	index = 0;
 	i = 0;
 	x = 0;
+	token = NULL;
+	temp = NULL;
 	while (input[i])
 	{
 		if (ft_strchr_i(" |'\"<>", input[i]) != -1)
@@ -71,6 +75,9 @@ void	tokenize(char *input)
 			temp->type = TOKEN_WORD;
 			i += temp->len;
 		}
+		x = 0;
+		temp = tokenlast(&token);
+		temp->index = index++;
 	}
 	temp = tokenfirst(&token);
 	printf("Tokens:\n");
