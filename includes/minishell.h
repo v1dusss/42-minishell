@@ -43,7 +43,10 @@ typedef struct s_token
 	struct s_token	*prev;
 }					t_token;
 
-void				tokenize(char *input);
+# define PRINT_INPUT 0
+# define PRINT_TOKENS 0
+
+void				tokenize(t_token **token, char *input);
 t_token				*tokenfirst(t_token **token);
 t_token				*tokenlast(t_token **token);
 void				token_new(t_token **token);

@@ -44,9 +44,8 @@ void	which_delimiter(t_token **token, char *input, int i)
 	fill_token(token, input, i, temp->type);
 }
 
-void	tokenize(char *input)
+void	tokenize(t_token **token, char *input)
 {
-	t_token	*token;
 	t_token	*temp;
 	int		index;
 	int		i;
@@ -55,33 +54,32 @@ void	tokenize(char *input)
 	index = 0;
 	i = 0;
 	x = 0;
-	token = NULL;
 	temp = NULL;
 	while (input[i])
 	{
 		if (ft_strchr_i(" |'\"<>", input[i]) != -1)
 		{
-			which_delimiter(&token, input, i);
-			i += tokenlast(&token)->len;
+			which_delimiter(token, input, i);
 		}
 		else
 		{
-			token_new(&token);
-			temp = tokenlast(&token);
+			token_new(token);
+			temp = tokenlast(token);
 			while (ft_strchr_i(" |'\"<>", input[i + x]) == -1 && input[i + x])
 				x++;
 			temp->content = ft_substr(input, i, x);
 			temp->len = ft_strlen(temp->content);
 			temp->type = TOKEN_WORD;
-			i += temp->len;
 		}
 		x = 0;
-		temp = tokenlast(&token);
+		temp = tokenlast(token);
+		i += temp->len;
 		temp->index = index++;
 	}
-	temp = tokenfirst(&token);
-	printf("Tokens:\n");
-	while (temp)
+	temp = tokenfirst(token);
+	if (PRINT_TOKENS)
+		printf("Tokens:\n");
+	while (temp && PRINT_TOKENS)
 	{
 		printf("**********\n");
 		printf("content: %s\n", temp->content);
