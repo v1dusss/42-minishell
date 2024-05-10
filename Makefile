@@ -24,19 +24,23 @@ OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 all: libft $(Name)
 
 $(Name): $(OBJ)
-	make -C $(LIBFT)
-	$(CC) $(CFLAGS) -o $(Name) $(OBJ) $(LDFLAGS) $(LIBFT)/libft.a
+	@make -C $(LIBFT)
+	@$(CC) $(CFLAGS) -o $(Name) $(OBJ) $(LDFLAGS) $(LIBFT)/libft.a
+	@echo "\033[1;32m ✅ [minishell created]\033[0m"
 
 clean:
-	rm -rf $(OBJ_DIR)
-	make -C libft clean
+	@rm -rf $(OBJ_DIR)
+	@make -C libft clean
 
-fclean: clean
-	rm -f $(Name)
-	make -C libft fclean
+fclean:
+	@echo "\033[1;33m 🗑️  Deleting the obj directory and executable... 🗑️\033[0m"
+	@make clean
+	@rm -f $(Name)
+	@echo "\033[0;37m 🧹 [minishell deleted]\033[0m"
+	@make -C libft fclean
 
 re: fclean all
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@

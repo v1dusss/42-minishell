@@ -6,7 +6,7 @@
 #    By: vsivanat <vsivanat@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 20:24:52 by vsivanat          #+#    #+#              #
-#    Updated: 2024/05/09 15:21:11 by vsivanat         ###   ########.fr        #
+#    Updated: 2024/05/10 14:12:42 by vsivanat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,9 +95,9 @@ clean:
 	@rm -rf $(OBJDIR)
 
 fclean:
-	@echo "\033[0;37m 🧹 [Libft deleted]\033[0m"
 	@make clean
 	@rm -f $(NAME)
+	@echo "\033[0;37m 🧹 [Libft deleted]\033[0m"
 
 re: fclean all
 
