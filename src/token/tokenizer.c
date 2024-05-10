@@ -27,40 +27,30 @@ void	which_delimiter(t_token **token, char *input, int i)
 		temp->type = TOKEN_SINGLE_QUOTE;
 	else if (input[i] == '\"')
 		temp->type = TOKEN_DOUBLE_QUOTE;
+	else if (input[i] == '<' && input[i + 1] == '<')
+		temp->type = TOKEN_DOUBLE_REDIRECT_INPUT;
 	else if (input[i] == '<')
-	{
-		if (input[i + 1] == '<')
-			temp->type = TOKEN_DOUBLE_REDIRECT_INPUT;
-		else
-			temp->type = TOKEN_REDIRECT_INPUT;
-	}
+		temp->type = TOKEN_REDIRECT_INPUT;
+	else if (input[i] == '>' && input[i + 1] == '>')
+		temp->type = TOKEN_DOUBLE_REDIRECT_OUTPUT;
 	else if (input[i] == '>')
-	{
-		if (input[i + 1] == '>')
-			temp->type = TOKEN_DOUBLE_REDIRECT_OUTPUT;
-		else
-			temp->type = TOKEN_REDIRECT_OUTPUT;
-	}
+		temp->type = TOKEN_REDIRECT_OUTPUT;
 	fill_token(token, input, i, temp->type);
 }
 
 void	tokenize(t_token **token, char *input)
 {
 	t_token	*temp;
-	int		index;
 	int		i;
 	int		x;
 
-	index = 0;
 	i = 0;
 	x = 0;
 	temp = NULL;
 	while (input[i])
 	{
 		if (ft_strchr_i(" |'\"<>", input[i]) != -1)
-		{
 			which_delimiter(token, input, i);
-		}
 		else
 		{
 			token_new(token);
@@ -74,7 +64,6 @@ void	tokenize(t_token **token, char *input)
 		x = 0;
 		temp = tokenlast(token);
 		i += temp->len;
-		temp->index = index++;
 	}
 	temp = tokenfirst(token);
 	if (PRINT_TOKENS)
@@ -85,7 +74,6 @@ void	tokenize(t_token **token, char *input)
 		printf("content: %s\n", temp->content);
 		printf("len: %d\n", temp->len);
 		printf("type: %d\n", temp->type);
-		printf("index: %d\n", temp->index);
 		temp = temp->next;
 	}
 }

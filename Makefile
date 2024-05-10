@@ -14,6 +14,7 @@ VPATH = \
 SRC = \
 	main.c \
 	tokenizer.c \
+	abstract_syntax_tree.c \
 	ft_lst_utils.c
 
 # Objects

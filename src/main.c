@@ -38,17 +38,14 @@ int	get_prompt(char **envp)
 	if (!input)
 		return (1);
 	if (input[0] == '\0')
-	{
-		free(input);
-		return (0);
-	}
+		return (free(input), 0);
 	if (PRINT_INPUT)
 		printf("\033[0;37mYou entered: \033[1;37m%s\033[0m\n", input);
 	tokenize(&token, input);
 	add_history(input);
+	get_priority(&token);
 	execute(token, envp);
-	free(input);
-	return (0);
+	return (free(input), 0);
 }
 
 int	main(int argc, char **argv, char **envp)
