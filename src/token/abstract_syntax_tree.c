@@ -56,10 +56,10 @@ void	get_ast(t_token *token, t_ast_node **ast)
 		return ;
 	if (*ast == NULL)
 		*ast = malloc(sizeof(t_ast_node));
-	temp_ast = NULL;
+	temp_ast = *ast;
 	highest = get_highest(&token);
 	left_and_right(&left, &right, &highest);
-	(*ast)->token = highest;
+	temp_ast->token = highest;
 	printf("==========\n");
 	printf("highest: %s\n", highest->content);
 	if (highest->type == TOKEN_WORD || highest->type == TOKEN_SPACE)
@@ -75,6 +75,7 @@ void	get_ast(t_token *token, t_ast_node **ast)
 		printf(" r:%s", right->content);
 	}
 	printf("\n");
+	printf("00000000\n");
 	get_ast(left, &temp_ast->left);
 	get_ast(right, &temp_ast->right);
 }
