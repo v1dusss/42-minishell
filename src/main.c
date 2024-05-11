@@ -28,11 +28,13 @@ void	execute(t_token *token, char **envp)
 
 int	get_prompt(char **envp)
 {
-	t_token	*token;
-	char	*input;
-	char	*prompt;
+	t_token		*token;
+	t_ast_node	*ast;
+	char		*input;
+	char		*prompt;
 
 	token = NULL;
+	ast = NULL;
 	prompt = "$ ";
 	input = readline(prompt); // input needs to be freed
 	if (!input)
@@ -44,6 +46,7 @@ int	get_prompt(char **envp)
 	tokenize(&token, input);
 	add_history(input);
 	get_priority(&token);
+	get_ast(token, &ast);
 	execute(token, envp);
 	return (free(input), 0);
 }

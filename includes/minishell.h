@@ -58,6 +58,6 @@ t_token					*tokenfirst(t_token **token);
 t_token					*tokenlast(t_token **token);
 void					token_new(t_token **token);
 void					get_priority(t_token **token);
-t_ast_node				*get_ast(t_token *token);
+void					get_ast(t_token *token, t_ast_node **ast);
 
 #endif
