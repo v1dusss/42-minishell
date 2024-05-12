@@ -14,12 +14,11 @@
 				"editor.renderWhitespace": "all",
 				"editor.insertSpaces": false,
 				"debug.onTaskErrors": "debugAnyway",
-				"42header.email": "vsivanat@student.42.fr",
-				"42header.username": "vsivanat"
 			},
 			"extensions": [
 				"ms-vscode-remote.remote-containers",
 				"DoKca.42-ft-count-line",
+				"GitHub.github-vscode-theme",
 				"kube.42header",
 				"ms-vscode.cpptools",
 				"ms-vscode.cpptools-extension-pack",
