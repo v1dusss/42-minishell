@@ -9,13 +9,16 @@ LDFLAGS	:=	-lreadline
 
 VPATH = \
 	src \
-	src/token
+	src/token \
+	src/execute \
 
 # Sources
 SRC = \
 	main.c \
 	tokenizer.c \
 	abstract_syntax_tree.c \
+	expander.c \
+	execute.c \
 	ft_lst_utils.c
 
 # Objects
