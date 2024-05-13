@@ -24,34 +24,44 @@ void	execute(t_token *token, char **envp)
 		while (envp && *envp)
 			printf("%s\n", *envp++);
 	}
+	if (ft_strncmp(temp->content, "echo", 4) == 0)
+	{
+		if (temp->next)
+			temp = temp->next;
+		while (temp->type == TOKEN_SPACE)
+			temp = temp->next;
+		while (temp->content[i])
+			printf("%c", temp->content[i++]);
+		printf("\n");
+	}
 }
 
-void	print_ast(t_ast_node *ast)
-{
-	t_ast_node	*temp;
+// void	print_ast(t_ast_node *ast)
+// {
+// 	t_ast_node	*temp;
 
-	temp = ast;
-	if (!temp)
-		return ;
-	printf("***************\n");
-	printf("root: %s\n", temp->token->content);
-	if (temp->right)
-	{
-		printf("right: %s\n", temp->right->token->content);
-		temp = temp->right;
-	}
-	if (temp->right)
-	{
-		printf("right: %s\n", temp->right->token->content);
-		temp = temp->right;
-	}
-	if (temp->right)
-	{
-		printf("right: %s\n", temp->right->token->content);
-	}
-	else if (temp->right == NULL)
-		printf("right: NULL\n");
-}
+// 	temp = ast;
+// 	if (!temp)
+// 		return ;
+// 	printf("***************\n");
+// 	printf("root: %s\n", temp->token->content);
+// 	if (temp->right)
+// 	{
+// 		printf("right: %s\n", temp->right->token->content);
+// 		temp = temp->right;
+// 	}
+// 	if (temp->right)
+// 	{
+// 		printf("right: %s\n", temp->right->token->content);
+// 		temp = temp->right;
+// 	}
+// 	if (temp->right)
+// 	{
+// 		printf("right: %s\n", temp->right->token->content);
+// 	}
+// 	else if (temp->right == NULL)
+// 		printf("right: NULL\n");
+// }
 
 int	get_prompt(char **envp)
 {
@@ -71,10 +81,11 @@ int	get_prompt(char **envp)
 	if (PRINT_INPUT)
 		printf("\033[0;37mYou entered: \033[1;37m%s\033[0m\n", input);
 	tokenize(&token, input);
+	expander(&token, envp);
 	add_history(input);
-	get_priority(&token);
-	get_ast(token, &ast);
-	print_ast(ast);
+	// get_priority(&token);
+	// get_ast(token, &ast);
+	// print_ast(ast);
 	execute(token, envp);
 	return (free(input), 0);
 }
