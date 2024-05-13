@@ -44,13 +44,31 @@ int	get_prompt(char **envp)
 		return (free(input), 0);
 	if (PRINT_INPUT)
 		printf("\033[0;37mYou entered: \033[1;37m%s\033[0m\n", input);
+	printf("A\n");
 	tokenize(&token, input);
-	expander(&token, envp);
+	printf("B\n");
+	// expander(&token, envp);
+	printf("C\n");
 	add_history(input);
 	// get_priority(&token);
 	// get_ast(token, &ast);
 	// print_ast(ast);
-	execute(token, envp);
+	rearrange(&token);
+	printf("D\n");
+	execute(&token, envp);
+	printf("E\n");
+	while (token)
+	{
+		if (token->content)
+			printf("%s", token->content);
+		if (token->next)
+			token = token->next;
+		else
+		{
+			printf("\n");
+			break ;
+		}
+	}
 	return (free(input), 0);
 }
 

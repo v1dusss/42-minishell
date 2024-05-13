@@ -60,6 +60,7 @@ void					token_new(t_token **token);
 void					get_priority(t_token **token);
 void					get_ast(t_token *token, t_ast_node **ast);
 void					expander(t_token **token, char **envp);
-void					execute(t_token *token, char **envp);
+void					execute(t_token **token, char **envp);
+void					rearrange(t_token **token);
 
 #endif

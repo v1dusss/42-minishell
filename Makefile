@@ -18,6 +18,7 @@ SRC = \
 	tokenizer.c \
 	abstract_syntax_tree.c \
 	expander.c \
+	rearrange.c \
 	execute.c \
 	ft_lst_utils.c
 
