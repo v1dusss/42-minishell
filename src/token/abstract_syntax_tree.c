@@ -47,7 +47,6 @@ void	left_and_right(t_token **left, t_token **right, t_token **highest)
 
 void	get_ast(t_token *token, t_ast_node **ast)
 {
-	t_ast_node	*temp_ast;
 	t_token		*right;
 	t_token		*left;
 	t_token		*highest;
@@ -57,7 +56,6 @@ void	get_ast(t_token *token, t_ast_node **ast)
 	if (*ast == NULL)
 		*ast = malloc(sizeof(t_ast_node));
 	highest = get_highest(&token);
-	temp_ast = NULL;
 	left_and_right(&left, &right, &highest);
 	(*ast)->token = highest;
 	printf("==========\n");

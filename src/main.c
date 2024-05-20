@@ -30,12 +30,12 @@
 int	get_prompt(char **envp)
 {
 	t_token		*token;
-	t_ast_node	*ast;
+	//t_ast_node	*ast;
 	char		*input;
 	char		*prompt;
 
 	token = NULL;
-	ast = NULL;
+	//ast = NULL;
 	prompt = "$ ";
 	input = readline(prompt); // input needs to be freed
 	if (!input)

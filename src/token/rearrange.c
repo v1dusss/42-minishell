@@ -23,6 +23,7 @@ void	redirect_found(t_token **token, t_token *temp)
 		if (temp->type == TOKEN_WORD)
 			i++;
 	}
+	temp = temp->prev;
 	if (i == 2)
 	{
 		redirect_back = temp;
