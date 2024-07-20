@@ -30,13 +30,11 @@ void	redirect_found(t_token **token, t_token *temp)
 		next = redirect_back->next;
 		redirect_front->prev = NULL;
 		redirect_back->next = NULL;
-		if (next)
-			prev->next = next;
-		else
-			prev->next = NULL;
 		if (prev)
+			prev->next = next;
+		if (next && prev)
 			next->prev = prev;
-		else
+		if (next && !prev)
 			next->prev = NULL;
 		temp = tokenlast(token);
 		temp->next = redirect_front;

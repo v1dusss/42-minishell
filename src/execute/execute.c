@@ -8,7 +8,6 @@ void	execute(t_token **token, char **envp)
 	i = 0;
 	printf("execute\n");
 	temp = tokenfirst(token);
-	printf("test\n");
 	if (ft_strncmp(temp->content, "exit", 4) == 0)
 	{
 		printf("exit\n");
@@ -25,8 +24,8 @@ void	execute(t_token **token, char **envp)
 	if (ft_strncmp(temp->content, "env", 3) == 0)
 	{
 		printf("env\n");
-		while (envp && *envp)
-			printf("%s\n", *envp++);
+		while (envp[i])
+			printf("%s\n", envp[i++]);
 	}
 	if (ft_strncmp(temp->content, "echo", 4) == 0)
 	{
@@ -41,3 +40,4 @@ void	execute(t_token **token, char **envp)
 	}
 	printf("end execute\n");
 }
+
