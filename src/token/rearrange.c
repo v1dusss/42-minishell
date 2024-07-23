@@ -50,7 +50,6 @@ void	rearrange(t_token **token)
 	temp = tokenfirst(token);
 	while (temp)
 	{
-		printf("*");
 		usleep(100);
 		if (temp->type == TOKEN_REDIRECT_INPUT
 			|| temp->type == TOKEN_REDIRECT_OUTPUT)

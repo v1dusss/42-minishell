@@ -1,6 +1,7 @@
 Name = minishell
 
 # Compiler
+DEBUG = 0
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 INC = -I includes -I libft
@@ -31,7 +32,7 @@ all: libft $(Name)
 
 $(Name): $(OBJ)
 	@make -C $(LIBFT)
-	@$(CC) $(CFLAGS) $(INC) -o $(Name) $(OBJ) $(LDFLAGS) $(LIBFT)/libft.a
+	@$(CC) $(CFLAGS) $(INC) -DDEBUG_MODE=$(DEBUG) -o $(Name) $(OBJ) $(LDFLAGS) $(LIBFT)/libft.a
 	@echo "\033[1;32m ✅ [minishell created]\033[0m"
 
 clean:
@@ -49,4 +50,4 @@ re: fclean all
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
-	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INC) -DDEBUG_MODE=$(DEBUG) -c $< -o $@

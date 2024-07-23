@@ -64,12 +64,10 @@ void	get_ast(t_token *token, t_ast_node **ast)
 		return ;
 	if (left != NULL)
 	{
-		printf("*");
 		printf(" l:%s\t  ", left->content);
 	}
 	if (right != NULL)
 	{
-		printf("*");
 		printf(" r:%s", right->content);
 	}
 	printf("\n");

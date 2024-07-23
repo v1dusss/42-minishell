@@ -66,9 +66,9 @@ void	tokenize(t_token **token, char *input)
 		i += temp->len;
 	}
 	temp = tokenfirst(token);
-	if (PRINT_TOKENS)
+	if (DEBUG_MODE)
 		printf("Tokens:\n");
-	while (temp && PRINT_TOKENS)
+	while (temp && DEBUG_MODE)
 	{
 		printf("**********\n");
 		printf("content: %s\n", temp->content);

@@ -50,8 +50,9 @@ typedef struct s_ast_node
 	struct s_ast_node	*right;
 }						t_ast_node;
 
-# define PRINT_INPUT 0
-# define PRINT_TOKENS 0
+# ifndef DEBUG_MODE
+#  define DEBUG_MODE 0
+# endif
 
 void					tokenize(t_token **token, char *input);
 t_token					*tokenfirst(t_token **token);
