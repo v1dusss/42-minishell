@@ -12,6 +12,7 @@ VPATH = \
 	src \
 	src/token \
 	src/execute \
+	src/utils \
 
 # Sources
 SRC = \
@@ -21,7 +22,8 @@ SRC = \
 	expander.c \
 	rearrange.c \
 	execute.c \
-	ft_lst_utils.c
+	ft_lst_utils.c \
+	banner.c \
 
 # Objects
 OBJ_DIR := obj

@@ -64,4 +64,6 @@ void					expander(t_token **token, char **envp);
 void					execute(t_token **token, char **envp);
 void					rearrange(t_token **token);
 
+void					print_banner(void);
+
 #endif
