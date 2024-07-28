@@ -17,7 +17,7 @@ void	execute(t_token **token, char **envp)
 			printf("exit\n");
 		exit(0);
 	}
-	if (ft_strncmp(temp->content, "pwd", 3) == 0)
+	else if (ft_strncmp(temp->content, "pwd", 3) == 0)
 	{
 		if (DEBUG_MODE)
 			printf("pwd\n");
@@ -28,24 +28,54 @@ void	execute(t_token **token, char **envp)
 			printf("%c", envp[x][y]);
 		printf("\n");
 	}
-	if (ft_strncmp(temp->content, "env", 3) == 0)
+	else if (ft_strncmp(temp->content, "env", 3) == 0)
 	{
 		if (DEBUG_MODE)
 			printf("env\n");
 		while (envp[x])
 			printf("%s\n", envp[x++]);
 	}
-	if (ft_strncmp(temp->content, "echo", 4) == 0)
+	else if (ft_strncmp(temp->content, "echo", 4) == 0)
 	{
 		if (DEBUG_MODE)
 			printf("echo\n");
 		if (temp->next)
 			temp = temp->next;
-		while (temp->type == TOKEN_SPACE)
-			temp = temp->next;
-		while (temp->content[x])
-			printf("%c", temp->content[x++]);
+		else
+		{
+			printf("\n");
+			return ;
+		}
+		while (temp->content)
+		{
+			while (temp->type == TOKEN_SPACE && temp->next)
+				temp = temp->next;
+			if (temp->type == TOKEN_WORD)
+				printf("%s", temp->content);
+			if (temp->next)
+				temp = temp->next;
+			else
+				break ;
+		}
+		//if (temp->next)
+		//{
+		//	temp = temp->next;
+		//	while (temp->type == TOKEN_SPACE && temp->next)
+		//		temp = temp->next;
+		//	while (temp->content[x])
+		//	{
+		//		printf("[%s]", temp->content);
+		//		if (temp->next)
+		//			temp = temp->next;
+		//		else
+		//			break ;
+		//	}
+		//}
 		printf("\n");
+	}
+	else
+	{
+		printf("minishell: command not found: %s\n", temp->content);	
 	}
 }
 
