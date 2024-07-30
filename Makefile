@@ -24,6 +24,7 @@ SRC = \
 	execute.c \
 	ft_lst_utils.c \
 	banner.c \
+	ft_echo.c
 
 # Objects
 OBJ_DIR := obj

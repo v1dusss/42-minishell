@@ -39,37 +39,12 @@ void	execute(t_token **token, char **envp)
 	{
 		if (DEBUG_MODE)
 			printf("echo\n");
-		if (!temp->next)
-		{
-			if (DEBUG_MODE)
-				printf("no ->next after echo");
+		if (ft_echo(token) == true)
 			printf("\n");
-			return ;
-		}
-		else
-			temp = temp->next;
-		while (temp->type == TOKEN_SPACE && temp->next)
-			temp = temp->next;
-		while (temp->content)
-		{
-			if (temp->type == TOKEN_WORD || temp->type == TOKEN_SPACE)
-				printf("%s", temp->content);
-			if (temp->next)
-				temp = temp->next;
-			else
-				break;
-			while (temp->type == TOKEN_SPACE && temp->next)
-			{
-				temp = temp->next;
-			}
-			if (temp->type == TOKEN_WORD)
-				printf(" ");
-		}
-		printf("\n");
 	}
 	else
 	{
-		printf("minishell: command not found: %s\n", temp->content);	
+		printf("minishell: command not found: %s", temp->content);	
 	}
 }
 
