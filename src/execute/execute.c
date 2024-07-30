@@ -39,38 +39,32 @@ void	execute(t_token **token, char **envp)
 	{
 		if (DEBUG_MODE)
 			printf("echo\n");
-		if (temp->next)
-			temp = temp->next;
-		else
+		if (!temp->next)
 		{
+			if (DEBUG_MODE)
+				printf("no ->next after echo");
 			printf("\n");
 			return ;
 		}
+		else
+			temp = temp->next;
+		while (temp->type == TOKEN_SPACE && temp->next)
+			temp = temp->next;
 		while (temp->content)
 		{
-			while (temp->type == TOKEN_SPACE && temp->next)
-				temp = temp->next;
-			if (temp->type == TOKEN_WORD)
+			if (temp->type == TOKEN_WORD || temp->type == TOKEN_SPACE)
 				printf("%s", temp->content);
 			if (temp->next)
 				temp = temp->next;
 			else
-				break ;
+				break;
+			while (temp->type == TOKEN_SPACE && temp->next)
+			{
+				temp = temp->next;
+			}
+			if (temp->type == TOKEN_WORD)
+				printf(" ");
 		}
-		//if (temp->next)
-		//{
-		//	temp = temp->next;
-		//	while (temp->type == TOKEN_SPACE && temp->next)
-		//		temp = temp->next;
-		//	while (temp->content[x])
-		//	{
-		//		printf("[%s]", temp->content);
-		//		if (temp->next)
-		//			temp = temp->next;
-		//		else
-		//			break ;
-		//	}
-		//}
 		printf("\n");
 	}
 	else

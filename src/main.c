@@ -28,18 +28,6 @@ int	get_prompt(char **envp)
 	// print_ast(ast);
 	rearrange(&token);
 	execute(&token, envp);
-	while (token && DEBUG_MODE)
-	{
-		if (token->content)
-			printf("%s", token->content);
-		if (token->next)
-			token = token->next;
-		else
-		{
-			printf("\n");
-			break ;
-		}
-	}
 	return (free(input), 0);
 }
 
