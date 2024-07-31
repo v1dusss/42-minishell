@@ -7,8 +7,6 @@ bool	newline_check(t_token *temp)
 	newline_flag = true;
 	while (temp->content)
 	{
-		while (temp->type == TOKEN_SPACE && temp->next)
-			temp = temp->next;
 		if (temp->type == TOKEN_WORD)
 		{
 			if (ft_strncmp(temp->content, "-n", 2) == 0)
@@ -29,8 +27,10 @@ bool	ft_echo(t_token **token)
 {
 	t_token	*temp;
 	bool	newline_flag;
+	int		i;
 
 	newline_flag = true;
+	i = 1;
 	temp = tokenfirst(token);
 	if (!temp->next)
 	{
@@ -40,8 +40,6 @@ bool	ft_echo(t_token **token)
 	}
 	else
 		temp = temp->next;
-	while (temp->type == TOKEN_SPACE && temp->next)
-		temp = temp->next;
 	if (DEBUG_MODE)
 		printf("newline_flag: %d\n", newline_flag);
 	newline_flag = newline_check(temp);
@@ -49,17 +47,22 @@ bool	ft_echo(t_token **token)
 		printf("newline_flag: %d\n", newline_flag);
 	while (temp->content)
 	{
-		if (temp->type == TOKEN_WORD || temp->type == TOKEN_SPACE)
+		if (temp->type == TOKEN_WORD)
 			printf("%s", temp->content);
+		else if (temp->type == TOKEN_WORD_IN_QUOTE)
+			{
+				while (temp->content[i+ 1])
+				{
+					printf("%c", temp->content[i]);
+					i++;
+				}
+				i = 1;
+			}
 		if (temp->next)
 			temp = temp->next;
 		else
 			break;
-		while (temp->type == TOKEN_SPACE && temp->next)
-		{
-			temp = temp->next;
-		}
-		if (temp->type == TOKEN_WORD)
+		if (temp->type == TOKEN_WORD || temp->type == TOKEN_WORD_IN_QUOTE)
 			printf(" ");
 	}
 	return (newline_flag);

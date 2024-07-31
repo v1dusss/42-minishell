@@ -20,7 +20,7 @@ void	which_delimiter(t_token **token, char *input, int i)
 	token_new(token);
 	temp = tokenlast(token);
 	if (input[i] == ' ')
-		temp->type = TOKEN_SPACE;
+		return ;
 	else if (input[i] == '|')
 		temp->type = TOKEN_PIPE;
 	else if (input[i] == '\'')
@@ -43,34 +43,67 @@ void	tokenize(t_token **token, char *input)
 	t_token	*temp;
 	int		i;
 	int		x;
+	bool	quote;
+	bool	double_quote;
 
 	i = 0;
 	x = 0;
 	temp = NULL;
+	quote = false;
+	double_quote = false;
 	while (input[i])
 	{
-		if (ft_strchr_i(" |'\"<>", input[i]) != -1)
-			which_delimiter(token, input, i);
+		if (ft_strchr_i(" ", input[i]) != -1 && quote == false && double_quote == false)
+			i++;
 		else
 		{
-			token_new(token);
+			if (ft_strchr_i("|<>", input[i]) != -1)
+			{
+				which_delimiter(token, input, i);
+			}
+			else if (ft_strchr_i("'\"", input[i]) != -1)
+			{
+				if (input[i] == '\'')
+					quote = !quote;
+				else if (input[i] == '\"')
+					double_quote = !double_quote;
+				i -= tokenlast(token)->len;
+				i++;
+			}
+			else
+			{
+				token_new(token);
+				temp = tokenlast(token);
+				if (quote == true || double_quote == true)
+				{
+					while (ft_strchr_i("'\"", input[i + x]) == -1 && input[i + x])
+						x++;
+					i--;
+					x += 2;
+					temp->type = TOKEN_WORD_IN_QUOTE;
+				}
+				else
+				{
+					while (ft_strchr_i(" |'\"<>", input[i + x]) == -1 && input[i + x])
+						x++;
+					temp->type = TOKEN_WORD;
+				}
+				temp->content = ft_substr(input, i, x);
+				if (quote == true || double_quote == true)
+					i--;
+				temp->len = ft_strlen(temp->content);
+				x = 0;
+			}
 			temp = tokenlast(token);
-			while (ft_strchr_i(" |'\"<>", input[i + x]) == -1 && input[i + x])
-				x++;
-			temp->content = ft_substr(input, i, x);
-			temp->len = ft_strlen(temp->content);
-			temp->type = TOKEN_WORD;
+			i += temp->len;
 		}
-		x = 0;
-		temp = tokenlast(token);
-		i += temp->len;
 	}
-	temp = tokenfirst(token);
 	if (DEBUG_MODE)
 		printf("Tokens:\n");
+	temp = tokenfirst(token);
 	while (temp && DEBUG_MODE)
 	{
-		printf("**********\n");
+		printf("=================\n");
 		printf("content: %s\n", temp->content);
 		printf("len: %d\n", temp->len);
 		printf("type: %d\n", temp->type);

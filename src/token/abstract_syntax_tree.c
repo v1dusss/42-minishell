@@ -60,7 +60,7 @@ void	get_ast(t_token *token, t_ast_node **ast)
 	(*ast)->token = highest;
 	printf("==========\n");
 	printf("highest: %s\n", highest->content);
-	if (highest->type == TOKEN_WORD || highest->type == TOKEN_SPACE)
+	if (highest->type == TOKEN_WORD)
 		return ;
 	if (left != NULL)
 	{
