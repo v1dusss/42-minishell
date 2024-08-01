@@ -1,5 +1,20 @@
 #include "minishell.h"
 
+bool	n_check(t_token *temp)
+{
+	int		i;
+
+	i = 1;
+	while (temp->content[i])
+	{
+		if (temp->content[i] == 'n')
+			i++;
+		else
+			return (false);
+	}
+	return (true);
+}
+
 bool	newline_check(t_token *temp)
 {
 	bool	newline_flag;
@@ -9,9 +24,12 @@ bool	newline_check(t_token *temp)
 	{
 		if (temp->type == TOKEN_WORD || temp->type == TOKEN_WORD_IN_QUOTE)
 		{
-			if (ft_strcmp(temp->content, "-n") == 0)
+			if (ft_strncmp(temp->content, "-n", 2) == 0)
 			{
-				newline_flag = false;
+				if (n_check(temp))
+					newline_flag = false;
+				else
+					return (newline_flag);
 				if (DEBUG_MODE)
 					printf("-n found\n");
 			}
@@ -22,29 +40,6 @@ bool	newline_check(t_token *temp)
 	}
 	return (newline_flag);
 }
-
-//int	newline_check(t_token *temp)
-//{
-//	int	moved_tokes;
-
-//	moved_tokes = 0;
-//	while (temp->content)
-//	{
-//		if (temp->type == TOKEN_WORD || temp->type == TOKEN_WORD_IN_QUOTE)
-//		{
-//			if (ft_strncmp(temp->content, "-n", 2) == 0)
-//			{
-//				moved_tokes++;
-//				if (DEBUG_MODE)
-//					printf("-n found\n");
-//			}
-//			else
-//				return (moved_tokes);
-//			temp = temp->next;
-//		}
-//	}
-//	return (moved_tokes);
-//}
 
 bool	ft_echo(t_token **token)
 {
@@ -66,8 +61,13 @@ bool	ft_echo(t_token **token)
 	newline_flag = newline_check(temp);
 	if (DEBUG_MODE)
 		printf("newline_flag: %d\n", newline_flag);
-	while (ft_strcmp(temp->content, "-n") == 0 && temp->next)
-		temp = temp->next;
+	while (ft_strncmp(temp->content, "-n", 2) == 0 && temp->next)
+	{
+		if (n_check(temp))
+			temp = temp->next;
+		else
+			break;
+	}
 	while (temp->content)
 	{
 		if (temp->type == TOKEN_WORD || temp->type == TOKEN_WORD_IN_QUOTE)
