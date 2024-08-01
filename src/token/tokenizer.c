@@ -78,8 +78,6 @@ void	tokenize(t_token **token, char *input)
 				{
 					while (ft_strchr_i("'\"", input[i + x]) == -1 && input[i + x])
 						x++;
-					i--;
-					x += 2;
 					temp->type = TOKEN_WORD_IN_QUOTE;
 				}
 				else
@@ -89,8 +87,6 @@ void	tokenize(t_token **token, char *input)
 					temp->type = TOKEN_WORD;
 				}
 				temp->content = ft_substr(input, i, x);
-				if (quote == true || double_quote == true)
-					i--;
 				temp->len = ft_strlen(temp->content);
 				x = 0;
 			}
@@ -106,7 +102,7 @@ void	tokenize(t_token **token, char *input)
 		printf("=================\n");
 		printf("content: %s\n", temp->content);
 		printf("len: %d\n", temp->len);
-		printf("type: %d\n", temp->type);
+		printf("type: %u\n", temp->type);
 		temp = temp->next;
 	}
 }

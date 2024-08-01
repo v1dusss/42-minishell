@@ -27,10 +27,8 @@ bool	ft_echo(t_token **token)
 {
 	t_token	*temp;
 	bool	newline_flag;
-	int		i;
 
 	newline_flag = true;
-	i = 1;
 	temp = tokenfirst(token);
 	if (!temp->next)
 	{
@@ -47,17 +45,8 @@ bool	ft_echo(t_token **token)
 		printf("newline_flag: %d\n", newline_flag);
 	while (temp->content)
 	{
-		if (temp->type == TOKEN_WORD)
+		if (temp->type == TOKEN_WORD || temp->type == TOKEN_WORD_IN_QUOTE)
 			printf("%s", temp->content);
-		else if (temp->type == TOKEN_WORD_IN_QUOTE)
-			{
-				while (temp->content[i+ 1])
-				{
-					printf("%c", temp->content[i]);
-					i++;
-				}
-				i = 1;
-			}
 		if (temp->next)
 			temp = temp->next;
 		else
