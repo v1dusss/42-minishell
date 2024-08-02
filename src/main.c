@@ -21,7 +21,7 @@ int	get_prompt(char **envp)
 	if (DEBUG_MODE)
 		printf("\033[0;37mYou entered: \033[1;37m%s\033[0m\n", input);
 	tokenize(&token, input);
-	// expander(&token, envp);
+	expander(&token, envp);
 	add_history(input);
 	// get_priority(&token);
 	// get_ast(token, &ast);
